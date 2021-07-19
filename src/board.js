@@ -5,7 +5,7 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sqares: Array(9).fill(null),
+            sqares: Array(9).fill(''),
             next: true,
         };
     }
@@ -16,10 +16,14 @@ class Board extends React.Component {
     clickSquare(i) {
         if(calculateWinner(this.state.sqares)){
             alert("game over");
-            this.setState({sqares:Array(9).fill(null)})
+            this.setState({sqares:Array(9).fill('')})
             return ;
         }
         const sqares = this.state.sqares.slice();
+        if(this.state.sqares[i]){
+            alert("this block has content");
+            return ;
+        }
         sqares[i] = this.state.next ? 'X' : 'O';
         this.setState({ sqares: sqares, next: !this.state.next });
     }
